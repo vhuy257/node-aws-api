@@ -9,6 +9,7 @@ var usersRouter = require('./routes/users');
 var topicRouter    = require('./routes/topic');
 var hike = require('./routes/hike');
 
+var cors       = require('cors');
 var app = express();
 
 const mongoose = require('mongoose');
