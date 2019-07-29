@@ -25,7 +25,7 @@ mongoose.connect('mongodb://vhuy2571990:langtu1990!@ds133187.mlab.com:33187/hero
     console.log('Could not connect to database', err);
     process.exit();
   })
-
+app.use(cors());
 // Add headers
 app.use(function (req, res, next) {
 
@@ -56,9 +56,8 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(cors());
-//app.use(express.static(path.join(__dirname, 'public')));
 
+//app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/api/comments', commentsRouter);
