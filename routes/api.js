@@ -6,7 +6,7 @@ const fs = require('fs');
 const fileType = require('file-type');
 const bluebird = require('bluebird');
 const multiparty = require('multiparty');
-const sharp = require('sharp');
+//const sharp = require('sharp');
 
 var admin = require('firebase-admin');
 
@@ -53,17 +53,17 @@ router.post('/upload', function(req, res) {
       const type      = fileType(buffer);
       const timestamp = Date.now().toString();
       const fileName  = `bucketFolder/${timestamp}-lg`;
-      const semiTransparentRedPng = await sharp(path)
-      .resize(480, 240)
-      .png()
-      .toBuffer();
+      // const semiTransparentRedPng = await sharp(path)
+      // .resize(480, 240)
+      // .png()
+      // .toBuffer();
 
       if(fields.editor && fields.editor[0]) {
         const data      = await uploadFileS3(buffer, fileName, type);
         return res.status(200).send(data);
       }
 
-      const dataImgCrop      = await uploadFileS3(semiTransparentRedPng, fileName, type);
+      const dataImgCrop      = await uploadFileS3(buffer, fileName, type);
       return res.status(200).send(dataImgCrop);
 
     } catch (err) {
