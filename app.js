@@ -6,9 +6,22 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var topicRouter    = require('./routes/topic');
 var hike = require('./routes/hike');
 
 var app = express();
+
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://vhuy2571990:langtu1990!@ds133187.mlab.com:33187/heroku_l7tf6059', {useNewUrlParser: true})
+  .then(() => {
+    console.log('connect to db successfully');
+  })
+  .catch(err => {
+    console.log('Could not connect to database', err);
+    process.exit();
+  })
+
 app.get('/hikes', hike.index);
 app.post('/add_hike', hike.add_hike);
 // view engine setup
@@ -23,6 +36,7 @@ app.use(cookieParser());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/api/topics', topicRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
