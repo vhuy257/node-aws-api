@@ -7,6 +7,9 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var topicRouter    = require('./routes/topic');
+var commentsRouter = require('./routes/comments');
+var apiRouter      = require('./routes/api');
+var tagRouter      = require('./routes/tags');
 var hike = require('./routes/hike');
 
 var cors       = require('cors');
@@ -58,7 +61,10 @@ app.use(cors());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/api/comments', commentsRouter);
 app.use('/api/topics', topicRouter);
+app.use('/api/tags', tagRouter);
+app.use('/api', apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
